@@ -1,0 +1,147 @@
+extends layout
+
+block content
+
+  script(type='text/javascript')
+    var aUsedMemoryData = [],
+      aFreeMemoryData = [],
+      aTotalMemoryData = [],
+      aMemoryUsageData = [],
+      aLoadAverageData = [],
+      aUserCpuUsageData = [],
+      aSystemCpuUsageData = [];
+
+    var background = {
+        type: 'linearGradient',
+        x0: 0,
+        y0: 0,
+        x1: 0,
+        y1: 1,
+        colorStops: [{ offset: 0, color: '#d2e6c9' },
+                     { offset: 1, color: 'white'}]
+    };
+
+    var i;
+    for(i=0; i<100; i++){
+      aUsedMemoryData.push([i, 0]);
+      aFreeMemoryData.push([i, 0]);
+      aTotalMemoryData.push([i, 0]);
+      aMemoryUsageData.push([i, 0]);
+      aLoadAverageData.push([i, 0]);
+      aUserCpuUsageData.push([i, 0]);
+      aSystemCpuUsageData.push([i, 0]);
+    }
+
+    $(document).ready(function(){
+      $('#used-memory').jqChart({
+        title: {text: 'Memory'},
+        background: background,
+        series: [
+          {
+            //type: 'line',
+            type: 'spline',
+            title : 'Total(Mb)',
+            data: aTotalMemoryData,
+            markers: { type: 'circle', size: 3 }
+          },
+          {
+            //type: 'line',
+            type: 'spline',
+            title : 'Used(Mb)',
+            data: aUsedMemoryData,
+            markers: { type: 'circle', size: 3 }
+          },
+          {
+            //type: 'line',
+            type: 'spline',
+            title : 'Free(Mb)',
+            data: aFreeMemoryData,
+            markers: { type: 'circle', size: 3 }
+          }
+        ]
+      });
+      $('#memory-usage').jqChart({
+        title: {text: 'Memory Usage'},
+        background: background,
+        series: [
+          {
+            type: 'spline',
+            title : '%',
+            data: aMemoryUsageData,
+            markers: { type: 'circle', size: 3 }
+          }
+        ]
+      });
+      $('#load-average').jqChart({
+        title: {text: 'Load Average'},
+        background: background,
+        series: [
+          {
+            type: 'spline',
+            title : 'Avr',
+            data: aLoadAverageData,
+            markers: { type: 'circle', size: 3 }
+          }
+        ]
+      });
+      $('#cpu-usage').jqChart({
+        title: {text: 'Cpu Usage'},
+        background: background,
+        series: [
+          {
+            type: 'spline',
+            title : 'User(%)',
+            data: aUserCpuUsageData,
+            markers: { type: 'circle', size: 3 }
+          },
+           {
+            type: 'spline',
+            title : 'System(%)',
+            data: aSystemCpuUsageData,
+            markers: { type: 'circle', size: 3 }
+          }
+        ]
+      });
+
+      var oSocket = io.connect('http://#{sHostname}');
+      oSocket.on('connect', function(htData){
+        console.log('connect');
+      });
+      oSocket.on('pushServerInfo', function(htData){
+        console.log(htData);
+      });
+      oSocket.on('pushMonitoringData', function(htData){
+        var nUsedMemory = htData.nUsedMemory,
+          nFreeMemory = htData.nFreeMemory,
+          nTotalMemory = htData.nTotalMemory,
+          nMemoryUsage = htData.nMemoryUsage,
+          nLoadAverage = htData.nLoadAverage,
+          nUserCpuUsage = htData.nUserCpuUsage,
+          nSystemCpuUsage = htData.nSystemCpuUsage;
+
+        aUsedMemoryData.splice(0, 1);
+        aUsedMemoryData.push([i++, nUsedMemory]);
+        aFreeMemoryData.splice(0, 1);
+        aFreeMemoryData.push([i++, nFreeMemory]);
+        aTotalMemoryData.splice(0, 1);
+        aTotalMemoryData.push([i++, nTotalMemory]);
+        aMemoryUsageData.splice(0, 1);
+        aMemoryUsageData.push([i++, nMemoryUsage]);
+        aLoadAverageData.splice(0, 1);
+        aLoadAverageData.push([i++, nLoadAverage]);
+        aUserCpuUsageData.splice(0, 1);
+        aUserCpuUsageData.push([i++, nUserCpuUsage]);
+        aSystemCpuUsageData.splice(0, 1);
+        aSystemCpuUsageData.push([i++, nSystemCpuUsage]);
+
+        $('#used-memory').jqChart('update');
+        $('#memory-usage').jqChart('update');
+        $('#cpu-usage').jqChart('update');
+        $('#load-average').jqChart('update');
+      })
+    });
+
+  div(id='used-memory', style='width:50%;height:300px;float:left')
+  div(id='memory-usage', style='width:50%;height:300px;float:left')
+  div(id='cpu-usage', style='width:50%;height:300px;float:left')
+  div(id='load-average', style='width:50%;height:300px;float:left')

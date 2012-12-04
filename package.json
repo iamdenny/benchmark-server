@@ -1,0 +1,30 @@
+{
+    "name": "benchmark-server"
+  , "version": "0.0.1"
+  , "sescripton" : "It's show up the status of the server such as cpu, mem and load average's usage per second, and provide you can check TPS(tranjaction per second)"
+  , "keywords" : ["benchmark","realtime","socket","socket.io","mornitor"]
+  , "homepage" : "https://github.com/iamdenny/benchmark-server"
+  , "author" : "Denny Lim <hello@iamdenny.com>"
+  , "contributors" : [
+        {"name" : "Denny Lim", "email" : "iamdenny@nhn.com" }
+      , {"name" : "Hyeongjin Kim", "email" : "hyeongjin.kim@nhn.com"}
+    ]
+  , "repository" : {
+        "type" : "git"
+      , "url" : "https://github.com/iamdenny/benchmark-server.git"
+    }
+  , "main" : "index"
+  , "engine" : "node >= 0.4.1"
+  , "scripts": {
+    "start": "node app"
+    }
+  , "dependencies": {
+        "express": "3.0.x"
+    , "jade": "*"
+    , "socket.io" : "0.9.x"
+    }
+  , "licenses": [{
+      "type": "MIT"
+    , "url": "http://www.opensource.org/licenses/mit-license.php"
+    }]
+}
