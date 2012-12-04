@@ -15,7 +15,7 @@ GIT
 git clone https://github.com/iamdenny/benchmark-server.git
 ```
 
-## Hot to use
+## How to use
 
 The port number shouldn't be same as the other HTTP which is your web server. Because It utilize express.js. It can be conflict.
 
@@ -27,3 +27,6 @@ BenchmarkServer.listen(15030);
 ## Output
 
 http://your-host:15030
+
+## Preview
+![preview](https://github.com/iamdenny/benchmark-server/raw/master/images/benchmark.jpg)
