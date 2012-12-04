@@ -1,3 +1,0 @@
-{"ts":1354603114800,"silentsave":true,"restoring":false,"patch":[[]],"length":0}
-{"contributors":[],"silentsave":false,"ts":1354603118136,"patch":[[{"diffs":[[1,"\r\n/*\r\n * GET home page.\r\n */\r\n\r\nexports.index = function(req, res){\r\n  res.render('index', { title: 'Benchmark-Server' });\r\n};"]],"start1":0,"start2":0,"length1":0,"length2":126}]],"length":126,"saved":false}
-{"contributors":[],"silentsave":false,"ts":1354603799648,"patch":[[{"diffs":[[0,"dex'"],[-1,", {"],[1,"\r\n    , { \r\n       "],[0," tit"]],"start1":85,"start2":85,"length1":11,"length2":27},{"diffs":[[0,"Server' "],[-1,"}"],[1,"\r\n        , sHostname : req.headers.host\r\n    }\r\n  "],[0,");\r\n};"]],"start1":127,"start2":127,"length1":15,"length2":65}]],"length":192,"saved":false}

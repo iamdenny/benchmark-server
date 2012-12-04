@@ -1,1 +1,0 @@
-{"ts":1354599337054,"silentsave":true,"restoring":false,"patch":[[{"diffs":[[1,"benchmark-server\n================\n\nIt's show up the status of the server such as cpu, mem and load average's usage per second, and provide you can check TPS(tranjaction per second)"]],"start1":0,"start2":0,"length1":0,"length2":180}]],"length":180}
